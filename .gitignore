@@ -1,0 +1,61 @@
+# Xcode
+.DS_Store
+build/
+*.xcworkspace
+!default.xcworkspace
+xcuserdata/
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xccheckout
+*.xcodeproj/
+*.xcscmblueprint
+
+# Swift Package Manager
+.build/
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# CocoaPods
+Pods/
+*.lock
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/*.log
+
+# Xcode Logs
+*.xcactivitylog
+
+# Certificates
+*.mobileprovision
+*.xcconfig
+
+# App Data
+*.plist
+
+# Realm
+*.realm
+*.realm.lock
+*.realm.management/
+
+# Firebase
+GoogleService-Info.plist
+
+# Env
+.env
+.env.*
+
+# Temp files
+*.tmp
+*.swp
+*.sw~
+
+# Crashlytics
+*.dSYM.zip
