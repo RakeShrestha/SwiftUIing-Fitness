@@ -73,8 +73,6 @@ public class URLSessionHTTPClient: HTTPClient {
         
         if let token = token {
             request = URLSessionHTTPClient.requestAddingTokenHeaders(to: request, token: token)
-        } else  {
-            return
         }
         
         startTask(with: request, completion: completion, progressMade: nil)

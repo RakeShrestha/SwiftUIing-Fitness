@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     
+    private var viewModel = LoginViewModel()
+    
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -134,6 +136,7 @@ struct LoginView: View {
         // Sign In Button
         ActionButton(label: "Login", icon: "arrowRight") {
             // Handle login action here
+            viewModel.loginUser(email: email, password: password)
         }
     }
     
