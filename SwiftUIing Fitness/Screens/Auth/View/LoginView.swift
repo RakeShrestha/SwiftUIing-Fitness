@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    private var viewModel = LoginViewModel()
+    private let viewModel = LoginViewModel()
     
     @State private var email: String = ""
     @State private var password: String = ""

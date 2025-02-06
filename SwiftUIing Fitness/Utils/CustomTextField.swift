@@ -30,13 +30,13 @@ struct TextFieldWithIcon: View {
                         .frame(width: 24, height: 24)
                         .padding(.trailing, 4)
                 }
-                    TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(.white.opacity(0.5)))
-                        .font(.headline)
-                        .foregroundColor(Color.white)
-                        .tint(Color.white)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .focused($isFocused)
+                TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(.white.opacity(0.5)))
+                    .font(.headline)
+                    .foregroundColor(Color.white)
+                    .tint(Color.white)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .focused($isFocused)
             }
             .padding()
             .background(Color(hex: "111214"))
@@ -128,13 +128,13 @@ struct OTPTextField: View {
     @State private var oldValue = ""
     
     @Binding var enteredOTP: String
-
+    
     init(numberOfPinFields: Int, enteredOTP: Binding<String>) {
         self.numberOfPinFields = numberOfPinFields
         self._enteredOTP = enteredOTP
         _enterValue = State(initialValue: Array(repeating: "", count: numberOfPinFields))
     }
-
+    
     var body: some View {
         HStack(spacing: 16) {
             ForEach(0..<numberOfPinFields, id: \.self) { index in
@@ -159,14 +159,15 @@ struct OTPTextFieldCell: View {
     @FocusState.Binding var fieldFocus: Int? // Use FocusState.Binding
     @Binding var oldValue: String
     let numberOfPinFields: Int
-
+    
     var body: some View {
         TextField("", text: $text, onEditingChanged: { editing in
             if editing {
                 oldValue = text
             }
         })
-        .frame(width: UIScreen.main.bounds.width / 6, height: UIScreen.main.bounds.width / 6)
+        .frame(width: UIScreen.main.bounds.width / 8.5,
+               height: UIScreen.main.bounds.width / 8.5)
         .background(Color(hex: "393C43").opacity(0.5))
         .cornerRadius(16)
         .multilineTextAlignment(.center)
@@ -174,15 +175,19 @@ struct OTPTextFieldCell: View {
         .overlay(
             RoundedRectangle(cornerRadius: 18)
                 .strokeBorder(
-                    fieldFocus == index ? Color(hex: "F97316").opacity(0.4) : Color.clear,
+                    fieldFocus == index
+                    ? Color(hex: "F97316").opacity(0.4)
+                    : Color.clear,
                     lineWidth: 5.5
                 )
                 .padding(-5)
-                .animation(.spring(response: 0.5, dampingFraction: 0.6), value: fieldFocus)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6),
+                           value: fieldFocus)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(fieldFocus == index ? Color(hex: "F97316") : Color.clear, lineWidth: 2)
+                .stroke(fieldFocus == index ? Color(hex: "F97316") : Color.clear,
+                        lineWidth: 2)
                 .animation(.easeInOut(duration: 0.3), value: fieldFocus)
         )
         .focused($fieldFocus, equals: index) // Focuses this specific field

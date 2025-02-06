@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OTPView: View {
     let receivedOTP = "1234"
+    let viewModel = OTPViewModel()
     let email: String
     let password: String
     @State private var enteredOTP: String = ""
@@ -68,7 +69,7 @@ struct OTPView: View {
     private var otpFieldView : some View {
         HStack(alignment: .center) {
             Spacer()
-            OTPTextField(numberOfPinFields: 4, enteredOTP: $enteredOTP)
+            OTPTextField(numberOfPinFields: 6, enteredOTP: $enteredOTP)
             Spacer()
         }
     }
@@ -79,6 +80,7 @@ struct OTPView: View {
                 // OTP matches
             } else {
                 // OTP does not match
+                viewModel.verifyOTP(email: "", otp: enteredOTP)
                 withAnimation {
                     didOTPMatched = false
                 }
@@ -102,9 +104,9 @@ struct OTPView: View {
         }
         
         .frame(maxWidth: .infinity, alignment: .center)
-        .background(enteredOTP.count == 4 ? Capsule().fill(Color.init(hex: "F97316")) : Capsule().fill(Color.gray.opacity(0.2)))
+        .background(enteredOTP.count == 6 ? Capsule().fill(Color.init(hex: "F97316")) : Capsule().fill(Color.gray.opacity(0.2)))
         .padding(.vertical, 12)
-        .disabled(enteredOTP.count != 4)
+        .disabled(enteredOTP.count != 6)
     }
     
     private var footerView : some View {

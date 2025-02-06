@@ -11,6 +11,8 @@ struct SignupView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    private let viewModel = SignupViewModel()
+    
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var email: String = ""
@@ -158,6 +160,7 @@ struct SignupView: View {
                 }
             } else {
                 // Handle sign-up action
+                viewModel.getOTP(firstName: "", secondName: "", email: "", password: "")
                 navigateToForgotPassword = true
             }
         }
