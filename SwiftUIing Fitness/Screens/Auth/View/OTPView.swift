@@ -115,7 +115,7 @@ struct OTPView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white)
             Button {
-                
+                viewModel.resendOTP(email: "")
             } label: {
                 Text("Request again")
                     .foregroundStyle(Color.init(hex: "F97316"))
