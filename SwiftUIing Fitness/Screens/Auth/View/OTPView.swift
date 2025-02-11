@@ -80,7 +80,7 @@ struct OTPView: View {
                 // OTP matches
             } else {
                 // OTP does not match
-                viewModel.verifyOTP(email: "", otp: enteredOTP)
+                viewModel.verifyOTP(email: email, otp: enteredOTP)
                 withAnimation {
                     didOTPMatched = false
                 }
@@ -115,7 +115,7 @@ struct OTPView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white)
             Button {
-                viewModel.resendOTP(email: "")
+                viewModel.resendOTP(email: email)
             } label: {
                 Text("Request again")
                     .foregroundStyle(Color.init(hex: "F97316"))

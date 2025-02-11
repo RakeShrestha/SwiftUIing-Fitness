@@ -29,7 +29,7 @@ struct SignupView: View {
     @State private var isConfirmPasswordVisible: Bool = false
     
     @State private var didPasswordMatch: Bool = true
-    @State private var navigateToForgotPassword: Bool = false
+    @State private var navigateToOTPView: Bool = false
     
     // State to track keyboard height
     @State private var keyboardHeight: CGFloat = 0
@@ -91,7 +91,7 @@ struct SignupView: View {
                 .onTapGesture {
                     hideKeyboard()
                 }
-                .navigationDestination(isPresented: $navigateToForgotPassword) {
+                .navigationDestination(isPresented: $navigateToOTPView) {
                     OTPView(email: email, password: password)
                 }
             }
@@ -160,8 +160,8 @@ struct SignupView: View {
                 }
             } else {
                 // Handle sign-up action
-                viewModel.getOTP(firstName: "", secondName: "", email: "", password: "")
-                navigateToForgotPassword = true
+                viewModel.getOTP(firstName: firstName, secondName: lastName, email: email, password: password)
+                navigateToOTPView = true
             }
         }
     }

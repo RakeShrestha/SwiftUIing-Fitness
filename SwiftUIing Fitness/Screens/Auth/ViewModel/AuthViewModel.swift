@@ -44,7 +44,7 @@ class SignupViewModel: BaseViewModel {
     
     public func getOTP(firstName: String, secondName: String, email: String, password: String) {
         let otpService = GetSignupResponse(client: URLSessionHTTPClient(), url: APIConstants.registerAccount(), token: nil)
-        let otpRequest = OTPRequest(firstName: "Nikel", secondName: "Maharjan", email: "nikel@test.com", password: "Nikel@123")
+        let otpRequest = OTPRequest(firstName: firstName, secondName: secondName, email: email, password: password)
 
         do {
             let encoder = JSONEncoder()
@@ -102,10 +102,38 @@ class OTPViewModel: BaseViewModel {
             self.errorFromAPI?(ResponseError.loginError.localizedDescription)
         }
     }
+    
+    public func verifyOTP(email: String, otp: String) {
+        let otpService = GetLoginToken(client: URLSessionHTTPClient(), url: APIConstants.verifyOTP(), token: nil)
+        let otpRequest = VerifyOTP(email: email, otp: otp)
+
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(otpRequest)
+            otpService.post(data: jsonData) { [weak self] results in
+                guard let self = self else { return }
+                do {
+                    let response = try results.get()
+                    print(response)
+                    guard let response = response else {
+                        return
+                    }
+                } catch let error {
+                    if self.checkErrorType(errorGot: error as? CustomError) {
+                        print(error)
+                    } else {
+                        self.errorFromAPI?(ResponseError.loginError.localizedDescription)
+                    }
+                }
+            }
+        } catch {
+            self.errorFromAPI?(ResponseError.loginError.localizedDescription)
+        }
+    }
 
     public func resendOTP(email: String) {
         let otpService = GetSignupResponse(client: URLSessionHTTPClient(), url: APIConstants.resendOTP(), token: nil)
-        let otpRequest = ResendOTP(email: "test1@gmail.com")
+        let otpRequest = ResendOTP(email: email)
 
         do {
             let encoder = JSONEncoder()
